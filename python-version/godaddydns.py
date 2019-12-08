@@ -69,7 +69,7 @@ class GodaddyDns:
             try:
                 with urllib.request.urlopen(req) as res:
                     code = res.getcode()
-                    # print (res.info())
+                     print (res.info())
                     resinfo = res.read().decode('utf-8')
                     result = True
                     if code != 200:
@@ -81,7 +81,7 @@ class GodaddyDns:
     def CreateDNSRecord(self, name, value, recordType='TXT'):
         url = "https://api.godaddy.com/v1/domains/" + \
             self.domain_name + "/records"
-        data = [{"data": value, "name": name, "ttl": 3600, "type": recordType}]
+        data = [{ "data": value, "name": name, "port": 1, "priority": 0, "protocol": "1", "service": "1", "ttl": 3600, "type": "TXT", "weight": 1 }]
         return self.curl(url, data, "PATCH")
 
     def GetDNSRecord(self, name, recordType='TXT'):
